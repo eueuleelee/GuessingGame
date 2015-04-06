@@ -1,86 +1,87 @@
 //jquery
-$(document).ready(function(){});
+$(document).ready(function(){
 
-//var actual = generate a random # (1-100)
-var actual = Math.floor(Math.random() * 100 + 1);
-//validate real #
+  function game () {
+    var actual = Math.floor(Math.random() * 100 + 1); //generate a random # (1-100)
+    var guess = 0;
+    var ans = [];
+    var remain = 5 - ans.length; //countdown # of guesses
+    var temp = "";
+    var diff = Math.abs(actual - guess);
 
-//var guess = user submit guess
-var guess =
+    //user submit guess
+    $('#guess').on("keyup", function(){
+      guess = +$(this).val();
+    });
 
-// validate if guess is a real #
-if (isNaN(guess) == true) {
-  comment = "This is not a valid number."
-}
+    //click to submit guess
+    $('#submit').on("click", function () {
 
-// guess 1,2,3,4,5 -> push into an array
-var ans = [];
+      ans.push(guess); //push guesses into an array ans
 
-function answer (guess) {
-  ans.push(guess);
-}
+      // validate if guess is a real #
+      if (isNaN(guess) == true) {
+        $('comment').text("This is not a valid number.");
+      }
 
-//[Reminder]
-var reminder = document.getElementById("reminder").innerHTML;
+      // if guess repeated : You've picked this number before!
+      for (var i=0; i < ans.length; i++) {
+        if (guess == ans[i]) {
+          $('comment').text("You've picked this number before!");
+        }
+      }
 
-//count down # of guesses
-var remain = 5 - ans.length;
+      //Submit guess -> cannot submit after 5, submit after play again!
+      //Sorry, Play Again! + Show Ans
+      //Hint of # (only show if ans.length < 5)
+      if (ans.length < 5) {
+        $('reminder').text("You have " + remain + " guesses remaining!");
+      }
+      else if (actual != guess && remain == 0) {
+        $('reminder').text("Sorry, Play Again!");
+      }
 
-//Submit guess -> cannot submit after 5, submit after play again!
-//Sorry, Play Again! + Show Ans
-//Hint of # (only show if ans.length < 5)
-if (ans.length < 5) {
-  reminder = "You have " + remain + " guesses remaining!";
-}
-else if (actual != guess && remain == 0) {
-  reminder = "Sorry, Play Again!";
-}
+      //compare actual and guess
+      //temperature  +ve #(actual - guess)
+      if (diff <= 5) {
+        temp = "Super Hot";
+      }
+      else if (diff <= 10) {
+        temp = "Hot";
+      }
+      else if (diff <= 15) {
+        temp = "Warm"
+      }
+      else if (diff <=25) {
+        temp = "Cold"
+      }
+      else {
+        temp = "Ice Cold"
+      }
 
-//[Comment Message]
-var comment = document.getElementById("comment").innerHTML;
+      // if actual > guess : guess higher | if actual < guess : guess lower | actual = guess : You Are CORRECT
+      if (actual > guess) {
+        $('comment').text("You Are " + temp +", Guess Higher");
+      }
+      else if (actual < guess) {
+        $('comment').text("You Are " + temp +", Guess Lower");
+      }
+      else if (actual == guess) {
+        $('comment').text("You are CORRECT");
+      }
 
-// if guess repeated : You've picked this number before!
-function checkRepeat () {
-  for (var i=0; i < ans.length; i++) {
-    if (guess == ans[i]) {
-      comment = "You've picked this number before!"
-    }
+    });
+
+    //show the answer
+    $('#hint').on("click", function(){
+      $('reminder').text(actual);
+    });  
   }
-}
 
-//compare actual and guess
-//temperature  +ve #(actual - guess)
-// <= 5 --> Super Hot | <=10 --> Hot | <=15 --> Warm | <25 --> Cold | Ice Cold
-var temp = "";
-var diff = Math.abs(actual - guess);
+  //Play again - reset the game
+  $("#restart").on("click", function(){
+    game();
+    $('comment').text("Your game has been restarted, submit a new guess!");
+  })
 
-if (diff <= 5) {
-  temp = "Super Hot";
-}
-else if (diff <= 10) {
-  temp = "Hot";
-}
-else if (diff <= 15) {
-  temp = "Warm"
-}
-else if (diff <=25) {
-  temp = "Cold"
-}
-else {
-  temp = "Ice Cold"
-}
-
-// if actual > guess : guess higher | if actual < guess : guess lower | actual = guess : You Are CORRECT
-if (actual > guess) {
-  comment = "You Are " + temp +", Guess Higher";
-}
-else if (actual < guess) {
-  comment = "You Are " + temp +", Guess Lower";
-}
-else if (actual == guess) {
-  comment = "You are CORRECT";
-}
-
-
-//Play again - reset the game
-  comment = "Your game has been restarted, submit a new guess!"
+});
