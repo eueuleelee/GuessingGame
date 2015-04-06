@@ -1,31 +1,55 @@
 <!doctype html>
 <html>
 <head>
-    <title>Guessing Game</title>
+    <title>Guess Game</title>
 
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="main.js"></script>
-    <script src="bower_components/jquery/dist/query.min.js"></script>
 
 </head>
 
 <body>
   <div id="game">
+
     <div class="container">
-      <h1>Guess the number</h1>
-      <form>
-        <div class="form-group">
-        <input id= "guess" type="text" class="form-control" placeholder="Input number 1-100">
+      <h1># Guess</h1>
+
+     <div id="inputarea">
+        <form>
+          <div class="form-group">
+            <input id= "guess" type="text" class="form-control" placeholder="From 1 to 100">
+          </div>
+        </form>
+
+
+        <div class="comment" >
+            You have 5 attempts! 
         </div>
-      </form>
-      <p id="comment" >hello</p>
-      <button id= "submit" class="btn btn-default" type="button" value="Input">Submit your guess</button>
-      <button id= "restart" class="btn btn-default" type="button" value="Input">Play again</button>
-      <button id= "hint" class="btn btn-default" type="button" value="Input">Give me a Hint</button>
-      <p id="reminder">lololo</p>
+
+     </div>
+
+      <div id="buttonbar">
+          <button id="submit" type="button" class="btn btn-default" aria-label="Left Align">
+            <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Go
+          </button>
+
+          <button id="restart" type="button" class="btn btn-default" aria-label="Left Align">
+            <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Restart
+          </button>
+
+
+          <button id= "hint" class="btn btn-default" type="button" value="Input">
+            <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> Hint
+          </button>
+      </div>
+
     </div>
-</div>
+
+  </div>
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="main.js"></script>ft;
+
 </body>
 </html>

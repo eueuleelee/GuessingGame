@@ -1,22 +1,54 @@
 body, html {
   color: #555;
 }
+
 .container {
   padding-top: 200px;
-  max-width: 535px;
+  max-width: 650px;
+  overflow: hidden;
+}
+
+#inputarea{
+  width: 420px;
+  float: left;
+}
+
+#buttonbar{
+  float: left;
+  padding-left: 2em;
+}
+
+
+#submit, #restart, #hint {
+    padding: 0.8em;
+}
+
+#submit {
+  margin: 0;
 }
 
 .form-control {
   background: #f1f1f1;
-  font-size: 2em;
-  padding: 1em 1em;
+  font-size: 1.4em;
+  padding: 1.1em 1em;
   border: 0;
   box-shadow: none;
 }
+
+
+.comment {
+  background: #6699FF;
+  color: white;
+  font-size: 2em;
+  padding: 1em;
+}
+
 .btn {
-  background: #3B9374;
+  background: #33CCFF;
+  display: block;
+  width: 100px;
   color: #fff;
-  padding: 1em 2em;
+  margin: 1em 0em 0em 0em;
   border: 0;
   text-shadow: none;
   box-shadow: none;
